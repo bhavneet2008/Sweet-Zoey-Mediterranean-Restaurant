@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet Zoey — Mediterranean Restaurant | Casper, WY</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terracotta: #C0622F;
+    --terracotta-dark: #a0521f;
+    --gold: #D4A843;
+    --gold-light: #e8c06a;
+    --cream: #FDF6EC;
+    --cream-dark: #f5eadb;
+    --olive: #3B3A2E;
+    --olive-light: #5a5948;
+    --white: #ffffff;
+    --text-dark: #2c2b22;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(253, 246, 236, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212, 168, 67, 0.2);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--olive);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--olive);
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+  .btn-order-nav {
+    background: var(--terracotta);
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.05em !important;
+    text-transform: none !important;
+    font-weight: 700 !important;
+    transition: background 0.2s !important;
+  }
+  .btn-order-nav:hover { background: var(--terracotta-dark) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1800&q=80') center/cover no-repeat;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(30,25,15,0.55) 0%, rgba(30,25,15,0.45) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 1s ease both;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--gold-light);
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    font-weight: 700;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold-light);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 700;
+    color: white;
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 14px;
+  }
+  .hero-tagline {
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    margin-bottom: 36px;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--terracotta);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--terracotta-dark); transform: translateY(-2px); }
+  .btn-secondary {
+    border: 2px solid white;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+  .hero-scroll {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.6);
+    font-size: 1.4rem;
+    animation: bounce 2s infinite;
+    z-index: 2;
+    text-decoration: none;
+  }
+
+  /* ── STORY ── */
+  #story {
+    padding: 100px 48px;
+    background: var(--cream);
+  }
+  .story-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+  }
+  .story-img-wrap {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+  .story-img-wrap img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    display: block;
+  }
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 35px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .story-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    color: var(--olive);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .story-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+  .story-text {
+    color: #5a5948;
+    line-height: 1.85;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .story-quote {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    margin-top: 28px;
+  }
+  .story-quote::before, .story-quote::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  /* ── MENU ── */
+  #menu {
+    padding: 100px 48px;
+    background: var(--cream-dark);
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .section-eyebrow-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .section-eyebrow-center::before, .section-eyebrow-center::after {
+    content: '';
+    width: 35px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--olive);
+    margin-bottom: 12px;
+  }
+  .section-sub {
+    color: var(--olive-light);
+    font-size: 0.95rem;
+    font-weight: 300;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .menu-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .menu-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+  }
+  .menu-card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+  .menu-card-body {
+    padding: 20px 22px 22px;
+    position: relative;
+  }
+  .menu-badge {
+    position: absolute;
+    top: -14px;
+    right: 16px;
+    background: var(--gold);
+    color: white;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+  .menu-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .menu-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--olive);
+  }
+  .menu-card-price {
+    color: var(--terracotta);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .menu-card-desc {
+    color: var(--olive-light);
+    font-size: 0.87rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .menu-cta {
+    text-align: center;
+    margin-top: 48px;
+  }
+  .btn-terracotta {
+    background: var(--terracotta);
+    color: white;
+    padding: 16px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-terracotta:hover { background: var(--terracotta-dark); transform: translateY(-2px); }
+
+  /* ── CATERING ── */
+  #catering {
+    background: var(--terracotta);
+    padding: 90px 48px;
+    text-align: center;
+  }
+  .catering-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .catering-eyebrow::before, .catering-eyebrow::after {
+    content: '';
+    width: 35px;
+    height: 1px;
+    background: rgba(255,255,255,0.5);
+  }
+  .catering-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+  }
+  .catering-text {
+    color: rgba(255,255,255,0.88);
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin: 0 auto 36px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .btn-outline-white {
+    border: 2px solid white;
+    color: white;
+    padding: 15px 38px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-outline-white:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+  /* ── REVIEWS ── */
+  #reviews {
+    padding: 100px 48px;
+    background: var(--cream);
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .review-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 28px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+  .review-stars {
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+  }
+  .review-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--olive);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .review-source {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--olive-light);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--olive);
+    padding: 70px 48px;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 6px;
+  }
+  .footer-logo-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 0.95rem;
+    margin-bottom: 32px;
+  }
+  .footer-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 18px;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.92rem;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .footer-icon {
+    color: var(--gold);
+    font-size: 1rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .footer-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .footer-map {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+  .footer-map iframe {
+    width: 100%;
+    height: 320px;
+    border: none;
+    display: block;
+  }
+  .btn-order-footer {
+    margin-top: 28px;
+    background: var(--terracotta);
+    color: white;
+    padding: 13px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-order-footer:hover { background: var(--terracotta-dark); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 14px 24px; }
+    .nav-links { gap: 20px; }
+    .story-inner, .footer-inner { grid-template-columns: 1fr; }
+    .menu-grid, .reviews-grid { grid-template-columns: 1fr 1fr; }
+    #story, #menu, #catering, #reviews, footer { padding: 70px 24px; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .menu-grid, .reviews-grid { grid-template-columns: 1fr; }
+    .hero-btns { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Sweet Zoey</a>
+  <ul class="nav-links">
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#catering">Catering</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://www.toasttab.com/local/order/sweet-zoey-cafe-632-cy-ave/r-0795903f-8f4f-48ff-a9fb-5fe0d7317e8f" target="_blank" class="btn-order-nav">Order Online</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Casper, Wyoming</div>
+    <h1 class="hero-title">Sweet Zoey</h1>
+    <p class="hero-sub">Mediterranean Restaurant</p>
+    <p class="hero-tagline">Authentic Mediterranean, Made with Love</p>
+    <div class="hero-btns">
+      <a href="https://www.toasttab.com/local/order/sweet-zoey-cafe-632-cy-ave/r-0795903f-8f4f-48ff-a9fb-5fe0d7317e8f" target="_blank" class="btn-primary">Order Online</a>
+      <a href="#menu" class="btn-secondary">View Menu</a>
+    </div>
+  </div>
+  <a href="#story" class="hero-scroll">↓</a>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="story-inner">
+    <div class="story-img-wrap reveal">
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80" alt="Sweet Zoey interior">
+    </div>
+    <div class="reveal">
+      <div class="section-eyebrow">Our Story</div>
+      <h2 class="story-title">A Family-Owned<br><em>Mediterranean Gem</em></h2>
+      <p class="story-text">Nestled in the heart of Casper, Wyoming, Sweet Zoey is more than a restaurant — it's a gathering place where generations of Mediterranean tradition come alive on every plate.</p>
+      <p class="story-text">We're known for our homemade baklava, fresh gyros, perfectly grilled kabobs, silky hummus, and signature bubble teas. Every dish is made from scratch daily using time-honored family recipes, served by a team that treats you like family.</p>
+      <p class="story-text">Walk in and feel the warmth — the aroma of fresh spices, the sizzle of the grill, and the genuine smiles that greet you at the door. This is what authentic Mediterranean hospitality looks like.</p>
+      <div class="story-quote">Made with love, served with pride</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="section-header reveal">
+    <div class="section-eyebrow-center">From Our Kitchen</div>
+    <h2 class="section-title">Menu Highlights</h2>
+    <p class="section-sub">Every dish crafted from scratch daily using time-honored family recipes</p>
+  </div>
+  <div class="menu-grid">
+
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=80" alt="Chicken Kabob">
+      <div class="menu-card-body">
+        <div class="menu-card-top">
+          <span class="menu-card-name">Chicken Kabob</span>
+          <span class="menu-card-price">$4.99</span>
+        </div>
+        <p class="menu-card-desc">Tender marinated chicken, grilled to perfection over open flame with aromatic Mediterranean spices.</p>
+      </div>
+    </div>
+
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1623428454614-abaf00244e56?w=600&q=80" alt="Gyro Salad">
+      <div class="menu-card-body">
+        <div class="menu-card-top">
+          <span class="menu-card-name">Gyro Salad</span>
+          <span class="menu-card-price">$7.99</span>
+        </div>
+        <p class="menu-card-desc">Fresh spring mix topped with crumbled feta, chickpeas, and our signature homemade dressing.</p>
+      </div>
+    </div>
+
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&q=80" alt="Gyro Rice Bowl">
+      <div class="menu-card-body">
+        <div class="menu-card-top">
+          <span class="menu-card-name">Gyro Rice Bowl</span>
+          <span class="menu-card-price">$10.99</span>
+        </div>
+        <p class="menu-card-desc">Seasoned rice with sliced gyro meat, cool tzatziki, and golden tahini drizzle.</p>
+      </div>
+    </div>
+
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=80" alt="Fresh Hummus">
+      <div class="menu-card-body">
+        <div class="menu-card-top">
+          <span class="menu-card-name">Fresh Hummus & Pita Chips</span>
+          <span class="menu-card-price">$9.99</span>
+        </div>
+        <p class="menu-card-desc">Silky smooth hummus served regular or spicy, with golden crispy pita chips.</p>
+      </div>
+    </div>
+
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=600&q=80" alt="Hummus with Gyro Meat">
+      <div class="menu-card-body">
+        <div class="menu-card-top">
+          <span class="menu-card-name">Hummus with Gyro Meat</span>
+          <span class="menu-card-price">$10.99</span>
+        </div>
+        <p class="menu-card-desc">Our famous hummus crowned with seasoned gyro meat and toasted pine nuts.</p>
+      </div>
+    </div>
+
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1600850056064-a8b28d38ad1f?w=600&q=80" alt="Stuffed Grape Leaves">
+      <div class="menu-card-body">
+        <div class="menu-badge">Fan Favorite</div>
+        <div class="menu-card-top">
+          <span class="menu-card-name">Stuffed Grape Leaves</span>
+        </div>
+        <p class="menu-card-desc">Delicate grape leaves filled with seasoned rice and herbs — a true Mediterranean classic.</p>
+      </div>
+    </div>
+
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1518013431117-eb1465fa5752?w=600&q=80" alt="Truffle Parmesan Fries">
+      <div class="menu-card-body">
+        <div class="menu-badge" style="background:var(--terracotta)">Crowd Favorite</div>
+        <div class="menu-card-top">
+          <span class="menu-card-name">Truffle Parmesan Fries</span>
+        </div>
+        <p class="menu-card-desc">Crispy golden fries tossed in truffle oil and showered with aged parmesan.</p>
+      </div>
+    </div>
+
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1519676867240-f03562e64548?w=600&q=80" alt="Walnut Baklava">
+      <div class="menu-card-body">
+        <div class="menu-badge" style="background:var(--olive)">House Specialty</div>
+        <div class="menu-card-top">
+          <span class="menu-card-name">Walnut Baklava</span>
+        </div>
+        <p class="menu-card-desc">Layers of flaky phyllo, crushed walnuts, and honey syrup — our signature house specialty.</p>
+      </div>
+    </div>
+
+    <div class="menu-card reveal">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Signature Drinks">
+      <div class="menu-card-body">
+        <div class="menu-badge" style="background:#7b6fa0">Signature</div>
+        <div class="menu-card-top">
+          <span class="menu-card-name">Signature Drinks</span>
+        </div>
+        <p class="menu-card-desc">Lavender Boba Tea and Strawberry Banana Smoothie — refreshing, unique, and made fresh.</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="menu-cta reveal">
+    <a href="https://www.toasttab.com/local/order/sweet-zoey-cafe-632-cy-ave/r-0795903f-8f4f-48ff-a9fb-5fe0d7317e8f" target="_blank" class="btn-terracotta">See Full Menu & Order</a>
+  </div>
+</section>
+
+<!-- CATERING -->
+<section id="catering">
+  <div class="catering-eyebrow">Events &amp; Gatherings</div>
+  <h2 class="catering-title">We Cater!</h2>
+  <p class="catering-text">From intimate gatherings to groups of 50+, Sweet Zoey brings authentic Mediterranean flavors to your event. Easy to work with, delicious every time.</p>
+  <a href="#contact" class="btn-outline-white">Contact Us to Book</a>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-header reveal">
+    <div class="section-eyebrow-center">What People Say</div>
+    <h2 class="section-title">Guest Reviews</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Best Mediterranean food we've had in 11 years!"</p>
+      <div class="review-source">— Google Review</div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The baklava is just like grandma would make. Can't wait to return!"</p>
+      <div class="review-source">— TripAdvisor</div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Friendly staff, fresh food, amazing atmosphere. A hidden gem!"</p>
+      <div class="review-source">— Yelp</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Sweet Zoey</div>
+      <div class="footer-logo-sub">Mediterranean Restaurant</div>
+
+      <div class="footer-info-item">
+        <span class="footer-icon">📍</span>
+        <div>
+          <div class="footer-label">Address</div>
+          632 CY Ave, Casper, WY 82601
+        </div>
+      </div>
+      <div class="footer-info-item">
+        <span class="footer-icon">📞</span>
+        <div>
+          <div class="footer-label">Phone</div>
+          (307) 333-4307
+        </div>
+      </div>
+      <div class="footer-info-item">
+        <span class="footer-icon">🕐</span>
+        <div>
+          <div class="footer-label">Hours</div>
+          Mon – Sat: 11:00 AM – 8:00 PM<br>
+          <span style="color:rgba(255,255,255,0.45)">Sunday: Closed</span>
+        </div>
+      </div>
+      <a href="https://www.toasttab.com/local/order/sweet-zoey-cafe-632-cy-ave/r-0795903f-8f4f-48ff-a9fb-5fe0d7317e8f" target="_blank" class="btn-order-footer">Order Online</a>
+    </div>
+    <div class="footer-map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.1!2d-106.3134!3d42.8501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5335fabc2a6b3b3f%3A0x1a2b3c4d5e6f7a8b!2s632%20CY%20Ave%2C%20Casper%2C%20WY%2082601!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
